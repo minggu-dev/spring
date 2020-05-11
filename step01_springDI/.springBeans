@@ -12,6 +12,13 @@
 		<config>src/main/java/sample03/ApplicationContext.xml</config>
 		<config>src/main/java/sample04/springDISetter.xml</config>
 		<config>src/main/java/sample05/applicationContext.xml</config>
+		<config>src/main/java/sample06/springDIList01.xml</config>
+		<config>src/main/java/sample06/springDIList02.xml</config>
+		<config>src/main/java/sample07/springDIAutowire.xml</config>
+		<config>src/main/java/sample08/applicationContext.xml</config>
+		<config>src/main/java/sample09/springDIAnnotation.xml</config>
+		<config>src/main/java/sample10/applicationContext.xml</config>
+		<config>src/main/java/sample11/applicationContext.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

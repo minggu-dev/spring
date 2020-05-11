@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		
+<!-- @Required를 사용하기 위한 bean생성 -->
+<!-- <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/> -->
+
+<!-- @autowired를 사용하기 위한 bean생성 -->
+<!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> -->
+
+<!-- 여러개의 클래스(@Annotation)을 한 번에 자동 스캐닝(생성) 해주는 context를 선언한다. @required, @autowired, @qualifier, @PostConstant, @preDestroy(), @configration -->
+<context:annotation-config/>
+
+<bean class="sample09.EmpDTO" id="emp" p:empNo="22">
+	<qualifier value="aa"></qualifier>
+</bean>
+<bean class="sample09.EmpDTO" id="dto2" p:empNo="200"/>
+
+<bean class="sample09.EmpService" id="service"/>
+
+<bean class="sample09.EmpController" id="control"/>
+
+<bean class="sample09.ResourceBean" id="resourceBean"/>
+
+</beans>

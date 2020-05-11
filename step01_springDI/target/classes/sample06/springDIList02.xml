@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- MetaDATA 문서(xml) 가져오기 -->
+<import resource="classpath:sample06/springDIList01.xml"/>
+
+<bean class="sample06.ListBean" id="listBean">
+	<property name="intList">
+		<list>
+			<value>10</value>
+			<value>11</value>
+			<value>12</value>
+			<value>13</value>
+			<value>14</value>
+			<value>15</value>
+			<value>16</value>
+			<value>17</value>
+		</list>
+	</property>
+	<property name="strList">
+		<list>
+			<value>김</value>
+			<value>민</value>
+			<value>호</value>
+			<value>짱</value>
+		</list>
+	</property>
+	<property name="customerList">
+		<list>
+			<ref bean="cu1"/>
+			<ref bean="cu2"/>
+			<ref bean="cu3"/>
+			<ref bean="cu4"/>
+			<ref bean="cu5"/>
+			<bean class="sample06.Customer">
+				<constructor-arg value="king"/>
+				<property name="addr" value="제주"/>
+				<property name="age" value="22"/>
+			</bean>
+		</list>
+	</property>
+</bean>
+
+</beans>
