@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="sample05.UserBean" id="user">
+		<property name="id" value="mino"/>
+		<property name="name" value="민호"/>
+		<property name="phone" value="222-3333"/>
+		<property name="addr" value="수원"/>
+	</bean>
+	<bean class="sample05.ProductBean" id="product">
+		<property name="p_no" value="1"/>
+		<property name="p_price" value="4000"/>
+		<property name="p_name" value="새우깡"/>
+	</bean>
+	<bean class="sample05.OrderMessageImpl" id="orderMessage">
+		<property name="message" value="주문되었습니다."/>
+		<property name="orderId" value="10"/>
+		<property name="userBean" ref="user"/>
+		<property name="productBean" ref="product"/>
+	</bean>
+</beans>
