@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean class="kosta.mvc.domain.Board" id="board1">
+	<property name="content" value="안녕"/>
+	<property name="date" value="2020-05-14"/>
+	<property name="no" value="3"/>
+	<property name="subject" value="오늘"/>
+	<property name="writer" value="미노"/>
+</bean>
+
+<bean class="kosta.mvc.domain.Board" id="board2">
+	<property name="content" value="아 집가고싶다."/>
+	<property name="date" value="2020-05-13"/>
+	<property name="no" value="2"/>
+	<property name="subject" value="어제"/>
+	<property name="writer" value="밍구"/>
+</bean>
+
+<bean class="kosta.mvc.domain.Board" id="board3">
+	<property name="content" value="집가고 싶다 줴엔장"/>
+	<property name="date" value="2020-05-12"/>
+	<property name="no" value="1"/>
+	<property name="subject" value="그제"/>
+	<property name="writer" value="마이노"/>
+</bean>
+
+</beans>
