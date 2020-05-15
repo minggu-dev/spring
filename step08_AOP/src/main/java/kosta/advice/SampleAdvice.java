@@ -6,21 +6,17 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 @Service
 @Aspect
 @Order(1)
-public class SampleAdvice {
-	@Pointcut("execution(public * kosta.service.*Impl.*(..))")
-	public void pointCut() {}
-	
+public class SampleAdvice {	
 	/**
 	 * before : 사전처리
 	 */
-	@Before("pointCut()")
+	@Before("PointCut.pointCut()")
 	public void before(JoinPoint joinPoint) {
 		String methodName = joinPoint.getSignature().getName();
 		Object[] params = joinPoint.getArgs();
@@ -39,7 +35,7 @@ public class SampleAdvice {
 	/**
 	 * after : 예외가 발생하든 안 하든 무조건 사후처리
 	 */
-	@After("pointCut()")
+	@After("PointCut.pointCut()")
 	public void afterFinally() {
 		System.out.println("afterFinally() 예외 발생여부 상관없이 호출됩니다.\n");
 	}
@@ -48,7 +44,7 @@ public class SampleAdvice {
 	/**
 	 * after-returning : 예외가 없이 정상적으로 동작했을 때 사후처리
 	 */
-	@AfterReturning(pointcut = "pointCut()", returning = "obj")
+	@AfterReturning(pointcut = "PointCut.pointCut()", returning = "obj")
 	public void afterReturning(JoinPoint joinPoint, Object obj) {
 		String methodName = joinPoint.getSignature().getName();
 		System.out.println(methodName + "의 리턴 값 : " + obj);
@@ -58,7 +54,7 @@ public class SampleAdvice {
 	/**
 	 * after-throwing : 예외가 발생할 때 사후처리
 	 */
-	@AfterThrowing(pointcut = "pointCut()", throwing = "e")
+	@AfterThrowing(pointcut = "PointCut.pointCut()", throwing = "e")
 	public void afterThrowing(Throwable e) {
 		System.out.println("afterThrowing 예외가 발생한 후 처리.... e : " + e + "\n");
 	}

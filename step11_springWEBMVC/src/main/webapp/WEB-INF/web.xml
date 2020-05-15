@@ -4,15 +4,19 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
-<!-- 	<context-param> -->
-<!-- 		<param-name>contextConfigLocation</param-name> -->
-<!-- 		<param-value>/WEB-INF/spring/root-context.xml</param-value> -->
-<!-- 	</context-param> -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
 	
-<!-- Creates the Spring Container shared by all Servlets and Filters -->
-<!-- 	<listener> -->
-<!-- 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
-<!-- 	</listener> -->
+<!-- 
+	Creates the Spring Container shared by all Servlets and Filters 
+	listener가 생성될 때 자동으로 스프링 bean설정문서인 /WEB-INF/applicationContext.xml을 찾는다.
+	만약, 위치와 이름을 변경하고 싶다면 context-param을 추가한다.(이름은 변경할 수 없다.)
+-->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
 	<!-- Processes application requests 
 		init-param을 설정하지 않으면 기본 springContainer는 [WEB-INF/서블릿-servlet.xml]이다.-->
@@ -21,7 +25,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml, /WEB-INF/spring/appServlet/updown-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -29,6 +33,24 @@
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.do</url-pattern>
+		<url-pattern>/blog/*</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 관리자 진입점 -->
+	<servlet>
+		<servlet-name>adminServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/admin-context.xml</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>adminServlet</servlet-name>
+		<url-pattern>*.admin</url-pattern>
 	</servlet-mapping>
 	
 	<!-- post방식 한글 인코딩 처리.... -->

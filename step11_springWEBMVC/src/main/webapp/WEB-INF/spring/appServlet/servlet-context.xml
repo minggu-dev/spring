@@ -9,20 +9,41 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
-	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- 
+		Enables the Spring MVC @Controller programming model 
+		MVC관련 annotation들을 가져온다. 그런데 context:component-scan을 사용해도 되는데 왜 굳이 넣어줬을까?
+		: 여기서만 존재하는 추가적인 annotation이 있다.
+	-->
 	<annotation-driven />
-
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	
+	<!-- 
+		Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory 
+		Controller가 처리하지 않아도 되는 경로를 설정한다.
+	-->
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
 	
 	<context:component-scan base-package="kosta.mvc.controller" />
 	
+	<!-- 모든 Controller가 공통으로 사용하게될 예외처리 클래스 등록 -->
+	<beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<beans:property name="exceptionMappings">
+			<beans:props>
+				<beans:prop key="java.lang.ArithmeticException">
+					error/arithView
+				</beans:prop>
+				<beans:prop key="java.lang.NumberFormatException">
+					error/numberView
+				</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
 	
+	
+	<!-- 
+		annotation-driven을 사용하지 않고 SimpleMappingExceptionResolver와 @ExceptionHandler를 동시에 사용하기 위해서는 
+		@ExceptionHandelr가 가능하도록 하는 객체를 생성한다.
+	 -->
 	
 </beans:beans>

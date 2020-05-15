@@ -6,6 +6,8 @@ public class Member {
 	private int age;
 	private String addr;
 	
+	private boolean state;
+	
 	public String getId() {
 		return id;
 	}
@@ -33,6 +35,14 @@ public class Member {
 	public void setAddr(String addr) {
 		System.out.println("setAddr(String addr) call.... addr : " + addr);
 		this.addr = addr;
+	}
+	
+	
+	public boolean isState() {
+		return state;
+	}
+	public void setState(boolean state) {
+		this.state = state;
 	}
 	@Override
 	public String toString() {

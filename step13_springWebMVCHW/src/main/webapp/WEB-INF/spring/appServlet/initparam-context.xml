@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="kosta.mvc.mino.domain.ProductDTO" id="p1">
+		<property name="code" value="A01"></property>
+		<property name="detail" value="잘돌아감"></property>
+		<property name="name" value="세탁기"></property>
+		<property name="price" value="5000"></property>
+	</bean>
+	<bean class="kosta.mvc.mino.domain.ProductDTO" id="p2">
+		<property name="code" value="A02"></property>
+		<property name="detail" value="잘돌아감"></property>
+		<property name="name" value="선풍기"></property>
+		<property name="price" value="3000"></property>
+	</bean>
+	<bean class="kosta.mvc.mino.domain.ProductDTO" id="p3">
+		<property name="code" value="A03"></property>
+		<property name="detail" value="잘돌아감"></property>
+		<property name="name" value="에어컨"></property>
+		<property name="price" value="10000"></property>
+	</bean>
+
+</beans>

@@ -16,7 +16,7 @@ public class AroundAdvice {
 	 * @return
 	 * @throws Throwable 
 	 */
-	@Around("SampleAdvice.pointCut()")
+	@Around("PointCut.pointCut()")
 	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 		//사전처리
 		String methodName = joinPoint.getSignature().getName();
