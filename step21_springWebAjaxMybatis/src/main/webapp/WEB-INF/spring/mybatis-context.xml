@@ -55,6 +55,11 @@
 		<beans:property name="configLocation" value="classpath:config/SqlMapConfig.xml"/>
 	</beans:bean>
 
+	<!-- interface기반의 Mapper등록하기 -->
+	<beans:bean class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<beans:property name="mapperInterface" value="kosta.mvc.repository.mapper.StudentMapper"/>
+		<beans:property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</beans:bean>
 
 	<beans:bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">

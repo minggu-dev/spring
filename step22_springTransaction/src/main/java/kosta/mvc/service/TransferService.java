@@ -1,0 +1,10 @@
+package kosta.mvc.service;
+
+import kosta.mvc.domain.TransferDTO;
+
+public interface TransferService {
+	/**
+	 * ∞Ë¡¬¿Ã√º
+	 */
+	void transfer(TransferDTO dto);
+}

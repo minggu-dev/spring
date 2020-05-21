@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kosta.mvc.model.domain.Student;
+import kosta.mvc.repository.mapper.StudentMapper;
 
 @Repository
 public class StudentDAOImpl implements StudentDAO {
@@ -15,13 +16,13 @@ public class StudentDAOImpl implements StudentDAO {
 	
 	@Override
 	public List<Student> selectAll() {
-		List<Student> list = session.selectList("studentMapper.studentAll");
+		List<Student> list = session.selectList("studentMapper.select");
 		return list;
 	}
 
 	@Override
 	public Student selectByStNo(String stNo) {
-		Student student = session.selectOne("studentMapper.studentOne", stNo);
+		Student student = session.selectOne("studentMapper.select", stNo);
 		return student;
 	}
 
