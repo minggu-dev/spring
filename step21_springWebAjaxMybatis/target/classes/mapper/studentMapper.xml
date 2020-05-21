@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studentMapper"><!-- namespace를 사용하는 것을 권장한다. 3.x부터는 필수요소이다!! -->
+	<select id="studentAll" resultType="student">
+		select * from student
+	</select>
+	
+	<select id="studentOne" parameterType="string" resultType="student">
+		select * from student where st_no=#{_parameter}
+	</select>
+	
+	<insert id="studentRegister" parameterType="student">
+		insert into student values(#{stNo}, #{stName}, #{stAge}, #{stAddr}, #{stPhone})
+	</insert>
+	
+	<update id="studentUpdate" parameterType="student">
+		update student
+		<set>
+			<if test="stName != null">st_name = #{stName}, </if>
+			<if test="stAge > 0"> st_age = #{stAge}, </if>
+			<if test="stAddr != null">st_addr = #{stAddr}, </if>
+			<if test="stPhone != null">st_phone = #{stPhone}</if>
+		</set>
+		where st_no = #{stNo}
+	</update>
+	
+	<delete id="studentDelete" parameterType="string">
+		delete student where st_no = #{_parameter}
+	</delete>
+</mapper>
