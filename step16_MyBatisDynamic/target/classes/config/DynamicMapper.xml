@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dynamic"><!-- namespace를 사용하는 것을 권장한다. -->
+	<sql id="empSql">
+		select employee_id, last_name, email, hire_date, job_id, salary from employees
+	</sql>
+<!-- 
+   1. emp테이블에서 조건에 따라 검색하기
+    
+      ename이 들어오면 ename에 해당하는 레코드 검색 or
+      job이 들어오면 job에 해당하는 레코드 검색 
+      둘다 들어오면 ename과 job을 조건으로 사용.
+      
+      select employee_id, last_name, email, hire_date, job_id, salary from employees;
+
+      select employee_id, last_name, email, hire_date, job_id, salary from employees where last_name="";
+
+      select employee_id, last_name, email, hire_date, job_id, salary from employees where last_name="" and job_id="";
+
+      select employee_id, last_name, email, hire_date, job_id, salary from employees where  job_id="";
+      
+   -->
+	<select id="ifSelect" resultType="employees" parameterType="employees">
+		<include refid="empSql"/>
+<!-- 		<where> -->
+<!-- 			<if test="lastName != null"> -->
+<!-- 				last_name=#{lastName} -->
+<!-- 			</if> -->
+<!-- 			<if test="jobId != null"> -->
+<!-- 				or job_id=#{jobId} -->
+<!-- 			</if> -->
+<!-- 		</where> -->
+		<trim prefix="where" prefixOverrides="or|and">
+			<if test="lastName != null">
+				last_name=#{lastName}
+			</if>
+			<if test="jobId != null">
+				or job_id=#{jobId}
+			</if>
+		</trim>
+	</select>
+	
+	
+	
+	<!--레코드 수정
+     last_name, job_id, salary 의 항목이 각각 null이 아닐때 employee_id에 해당하는
+     레코드 수정한다.
+     update employees  set last_name=?  where employee_id=?;
+     update employees  set job_id=?  where employee_id=?;
+     update employees  set salary=?  where employee_id=?;
+     update employees  set last_name=? ,job_id=? where employee_id=?;
+    -->
+    <update id="setUpdate" parameterType="employees">
+    	update employees
+    	<set>
+    		<if test="lastName != null">last_name = #{lastName}, </if>
+    		<if test="jobId != null">job_id = #{jobId}, hire_date = #{hireDate}</if>
+    		<if test="salary > 0">salary = #{salary}</if>
+    	</set>
+    	where employee_id=#{employeeId}
+    </update>
+	
+	
+	<!-- 
+      select * from employees
+      where employee_id in (7777);
+      
+       select * from employees
+      where employee_id in (7777,222,444,....);
+    
+     -->
+    <select id="forSelect" parameterType="list" resultType="employees">
+    	<include refid="empSql"/>
+    	<where>
+    		employee_id in
+    		<foreach collection="list" item="item" open="(" close=")" separator=",">
+    			#{item}
+    		</foreach>
+    	</where>
+    </select>
+	
+	
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proMapper"><!-- namespace를 사용하는 것을 권장한다. 3.x부터는 필수요소이다!! -->
+	<insert id="proInsert" parameterType="product">
+		insert into productlist values(#{code},#{name},#{qty},#{price},#{detail})
+	</insert>
+	
+	<update id="proUpdate" parameterType="product">
+		update productlist
+		<set>
+			<if test="name != null"> name = #{name}, </if>
+			<if test="qty > 0"> qty = #{qty}, </if>
+			<if test="price > 0"> price = #{price}, </if>
+			<if test="detail != null"> detail = #{detail}</if>
+		</set>
+		where code=#{code}
+	</update>
+	
+	<delete id="proDelete" parameterType="string">
+		delete productlist where code = #{_parameter}
+	</delete>
+	
+	<select id="proSelect" parameterType="map" resultType="product">
+		select * from productList
+		<where>
+			<if test="keyField != null">${keyField} like '%' || #{keyWord} || '%'</if>
+		</where>
+		<if test="sortTarget != null">order by ${sortTarget}</if>
+	</select>
+	
+	<select id="proQty" resultType="int">
+		select sum(qty) from productlist
+	</select>
+	
+	<select id="proSelectByCode" parameterType="list" resultType="product">
+		select * from productlist
+		<where>
+			code in
+			<foreach collection="list" item="code" open="(" close=")" separator=",">
+				#{code}
+			</foreach>
+		</where>
+	</select>
+</mapper>

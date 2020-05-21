@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 외부 properties파일의 위치 설정 -->
+	<properties resource="config/dbInfo.properties"/>
+	
+	
+	<!-- Camel표기법과 UnderScore표기법을 매칭시키는 세팅방법 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- 객체 별칭 만들기 -->
+	<typeAliases>
+		<typeAlias type="kosta.mino.domain.Product" alias="product"/>
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="UNPOOLED"><!-- UNPOOLED || POOLED 일정량의 CONNECTION을 확보할 것인지 아닌지를 판단 -->
+				<property name="driver" value="${driverName}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${userName}" />
+				<property name="password" value="${userPass}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	
+	<mappers>
+		<mapper resource="config/ProductMapper.xml"/>
+	</mappers>
+	
+</configuration>

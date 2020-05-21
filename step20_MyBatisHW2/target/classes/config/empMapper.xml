@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="empMapper"><!-- namespace를 사용하는 것을 권장한다. 3.x부터는 필수요소이다!! -->
+	<resultMap type="employees" id="employeesMap">
+		<id column="empno" property="empNo"/>
+		<result column="ename" property="empName"/>
+		<association property="dept" javaType="department">
+			<result column="dname" property="depName"/>
+			<result column="loc" property="loc"/>
+		</association>
+	</resultMap>
+	
+	<resultMap type="department" id="departmentMap">
+		<id column="deptno" property="deptNo"/>
+		<result column="dname" property="depName"/>
+		<result column="loc" property="loc"/>
+		<collection property="empList" ofType="employees">
+			<id column="empno" property="empNo"/>
+			<result column="ename" property="empName"/>
+		</collection>
+	</resultMap>
+	
+	<select id="empSelectDynamic" resultMap="employeesMap" parameterType="int">
+		select empno, ename, dname, loc
+		from emp join dept
+		using(deptno)
+		<if test="_parameter != 0">where empno = #{_parameter}</if>
+	</select>
+	
+	<select id="depSelectDynamic" resultMap="departmentMap" parameterType="int">
+		select deptno, dname, loc, empno, ename
+		from dept join emp
+		using(deptno)
+		<if test="_parameter != 0">where deptno = #{_parameter}</if>
+	</select>
+	
+	<select id="empSalGrade" resultType="int" parameterType="int">
+		SELECT grade
+		FROM emp e JOIN salgrade s
+		ON e.sal BETWEEN s.losal AND s.hisal
+		where e.empno=#{_parameter}
+	</select>
+	
+	<select id="salGradeSelect" resultType="employees" parameterType="int">
+		select empno, ename, job
+		from emp e join salgrade s
+		on e.sal between s.losal and s.hisal
+		where s.grade = #{_parameter}
+	</select>
+</mapper>
