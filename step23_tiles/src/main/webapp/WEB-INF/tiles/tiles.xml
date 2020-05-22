@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="layout" template="/WEB-INF/tiles/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/top.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"/>
+	</definition>
+	
+	<definition name="boardLayout" template="/WEB-INF/tiles/boardLayout.jsp">
+		<put-attribute name="top" value="/WEB-INF/tiles/top.jsp"/>
+		<put-attribute name="aside" value="/WEB-INF/tiles/aside.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"/>
+	</definition>
+	
+	<definition name="boardFreeLayout" template="/WEB-INF/tiles/boardFreeLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/top.jsp"/>
+	</definition>
+	
+	<!-- 
+		@Controller에서 리턴한 뷰의 정보가 */*처럼 되면
+		template을 적용한다. 
+	-->
+<!-- 	<definition name="*/*" extends="layout"> -->
+<!-- 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/> -->
+<!-- 	</definition> -->
+	<!-- user/* 결과 뷰 -->
+	<definition name="user/*" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp"/>
+	</definition>
+	
+	<!-- board/free/* 결과 뷰 -->
+	<definition name="board/free/*" extends="boardFreeLayout">
+		<put-attribute name="content" value="/WEB-INF/views/board/free/{1}.jsp"/>
+	</definition>
+	
+	<!-- board/** 결과 뷰 -->
+	<definition name="board/**" extends="boardLayout">
+		<put-attribute name="content" value="/WEB-INF/views/board/{1}.jsp"/>
+	</definition>
+	
+</tiles-definitions>
