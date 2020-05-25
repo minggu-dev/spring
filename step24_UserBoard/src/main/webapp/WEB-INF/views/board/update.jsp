@@ -1,7 +1,7 @@
 <%@ page info="게시판 수정하기" contentType="text/html;charset=UTF-8" %>
 <HTML>
 <HEAD>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
 <SCRIPT >
 function checkValid() {
@@ -37,8 +37,7 @@ function checkValid() {
 <BODY>
 
 
-<form name=updateForm method=post action="elec" onSubmit="return checkValid()">
-    <input type="hidden" value="update" name="command">
+<form name=updateForm method=post action="${pageContext.request.contextPath}/board/update" onSubmit="return checkValid()">
     <input type='hidden' name='modelNum' value="${elec.modelNum}">
 	<table align="center" cellpadding="5" cellspacing="1" width="600" border="1">
     <tr>
@@ -84,7 +83,7 @@ function checkValid() {
 </table>
 </form>
 <hr>
-<div align=right><span style="font-size:9pt;">&lt;<a href="elec?command=list">리스트로 돌아가기</a>&gt;</span></div>
+<div align=right><span style="font-size:9pt;">&lt;<a href="${pageContext.request.contextPath}/board/list">리스트로 돌아가기</a>&gt;</span></div>
 </BODY>
 
 

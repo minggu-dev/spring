@@ -26,7 +26,7 @@ public interface BoardService {
 	  /**
 	   * 모델번호에 해당하는 레코드 삭제
 	   * */
-	   int delete(String modelNum, String password);
+	   int delete(String modelNum, String password, String path);
 	  
 	   /**
 	    * 모델번호에 해당하는 레코드 수정

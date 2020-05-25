@@ -11,29 +11,28 @@ import kosta.mvc.user.domain.UserDTO;
 import kosta.mvc.user.service.UserService;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 	@Autowired
 	private UserService service;
 	
-	@RequestMapping("/{url}")
+	@RequestMapping("/user/{url}")
 	public String url(@PathVariable String url) {
 		return "user/" + url;
 	}
 	
-	@RequestMapping("/loginCheck")
+	@RequestMapping("/user/loginCheck")
 	public String login(UserDTO userDTO, HttpSession session){
 		UserDTO user = service.loginCheck(userDTO);
 		if(user != null) {
 			session.setAttribute("loginUser", user.getUserId());
 			session.setAttribute("loginName", user.getName());
 		}
-		return "user/login";
+		return "redirect:/";
 	}
 	
-	@RequestMapping("/logout")
+	@RequestMapping("/user/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "user/login";
+		return "redirect:/";
 	}
 }

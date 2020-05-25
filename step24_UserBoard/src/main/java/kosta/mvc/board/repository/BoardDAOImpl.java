@@ -1,6 +1,8 @@
 package kosta.mvc.board.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,26 +27,25 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int readnumUpdate(String modelNum) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.update("boardMapper.readUpdate", modelNum);
 	}
 
 	@Override
 	public int insert(ElectronicsDTO electronics) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.insert("boardMapper.insert", electronics);
 	}
 
 	@Override
 	public int delete(String modelNum, String password) {
-		// TODO Auto-generated method stub
-		return 0;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("modelNum", modelNum);
+		map.put("password", password);
+		return session.delete("boardMapper.delete", map);
 	}
 
 	@Override
 	public int update(ElectronicsDTO electronics) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.update("boardMapper.update", electronics);
 	}
 
 }

@@ -3,22 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <HEAD>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
 <SCRIPT language=javascript>
 function sendUpdate(){
-	document.requestForm.command.value ="updateForm";
-	document.requestForm.submit();
+	$('form[name=requestForm]').attr("action","updateForm");
+	$('form[name=requestForm]').submit();
 }
 
 
 function sendDelete(){
 	var password = prompt("삭제할 게시물의 비밀번호를 입력하세요");
 	if(password){
-		document.requestForm.command.value ="delete";
-		document.requestForm.password.value = password;
-		alert("11")
-		document.requestForm.submit();
+		$('form[name=requestForm]').attr("action","${pageContext.request.contextPath}/board/delete");
+		$('input[name=password]').val(password);
+		$('form[name=requestForm]').submit();
 	}else{
 		return false;
 	}
@@ -81,7 +80,7 @@ function sendDelete(){
         </td>
         <td width="450" height="20" colspan="3">
         	<span style="font-size:9pt;"><b>
-        	<a href='downLoad?fName=${elec.fname}'>
+        	<a href='${pageContext.request.contextPath}/board/down?fname=${elec.fname}'>
     			${elec.fname} 
       		</a>
       		  ( <fmt:formatNumber value="${elec.fsize}"/> byte)
@@ -92,18 +91,17 @@ function sendDelete(){
     <tr>
         <td height="20" colspan="4" align="center" valign="middle">
 			<!-- 수정시 필요한 데이터들을 hidden으로 숨겨놓고 폼 데이터로 보내준다. -->
-			<form name="requestForm" method=post action="elec">
+			<form name="requestForm" method=post action="${pageContext.request.contextPath}/board/updateForm">
 				<input type=hidden name="modelNum" value="${elec.modelNum}">
-				<input type=hidden name="command" value="">
 				<input type=hidden name="password" value="">
-				<input type=button value="수정하기" onClick="sendUpdate()">
+				<input type=submit value="수정하기">
 				<input type=button value="삭제하기" onClick="sendDelete()">
 			</form>
 		</td>
     </tr>
 </table>
 <hr>
-<div align=right><span style="font-size:9pt;">&lt;<a href="elec?command=list">리스트로 돌아가기</a>&gt;</span></div>
+<div align=right><span style="font-size:9pt;">&lt;<a href="${pageContext.request.contextPath}/board/list">리스트로 돌아가기</a>&gt;</span></div>
 
 
 

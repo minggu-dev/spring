@@ -12,7 +12,7 @@
 
 <c:choose>
 	<c:when test="${empty loginUser}">
-		<form class="form-horizontal" method="post" action="loginCheck">
+		<form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/user/loginCheck">
 			<fieldset>
 				<legend>Login</legend>
 				<div class="form-group">

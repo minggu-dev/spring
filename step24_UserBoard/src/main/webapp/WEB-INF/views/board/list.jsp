@@ -58,7 +58,7 @@
 		        </td>
 		        <td bgcolor="">
 					<p><span style="font-size:9pt;">
-					<a href="read?&modelNum=${elecDto.modelNum}">
+					<a href="read/${elecDto.modelNum}">
 					  ${elecDto.modelName}
 					</a>
 					</span></p>
@@ -92,7 +92,7 @@
 </table>
 <hr>
 <div align=right>
-<span style="font-size:9pt;">&lt;<a href="elecView/write.html">글쓰기</a>&gt;</span></div>
+<span style="font-size:9pt;">&lt;<a href="writeForm">글쓰기</a>&gt;</span></div>
 
 
 

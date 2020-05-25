@@ -4,18 +4,18 @@
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
 <SCRIPT language=javascript>
 function checkValid() {
     var f = window.document.writeForm;
 		
-	if ( f.model_num.value == "") {
+	if ( f.modelNum.value == "") {
 	    alert( "모델번호를 입력해 주세요." );
 	    f.model_num.focus();
 		return false;
     }
-	if ( f.model_name.value == "" ) {
+	if ( f.modelName.value == "" ) {
 		alert( "모델이름을 입력해 주세요." );
 		f.model_name.focus();
 		return false;
@@ -44,7 +44,7 @@ function checkValid() {
 </HEAD>
 <BODY>
 
-<form name="writeForm" method="post" action="../elec?command=insert" onSubmit='return checkValid()' enctype="multipart/form-data">
+<form name="writeForm" method="post" action="write" onSubmit='return checkValid()' enctype="multipart/form-data">
 
 <table align="center" cellpadding="5" cellspacing="2" width="600" border="1" >
 
@@ -58,14 +58,14 @@ function checkValid() {
             <p align="right"><b><span style="font-size:9pt;">모델번호</span></b></p>
         </td>
         <td width="450" height="20"><b><span style="font-size:9pt;">
-		<input type=text name="model_num" size="30"></span></b></td>
+		<input type=text name="modelNum" size="30"></span></b></td>
     </tr>
     <tr>
         <td width="150" height="20">
             <p align="right"><b><span style="font-size:9pt;">모델이름</span></b></p>
         </td>
         <td width="450" height="20"><b><span style="font-size:9pt;">
-		<input type=text name="model_name" size="30"></span></b></td>
+		<input type=text name="modelName" size="30"></span></b></td>
     </tr>
     <tr>
         <td width="150" height="20">
@@ -112,7 +112,7 @@ function checkValid() {
 </form>
 
 <hr>
-<div align=right><span style="font-size:9pt;">&lt;<a href="electronics?command=list">리스트로 돌아가기</a>&gt;</span></div>
+<div align=right><span style="font-size:9pt;">&lt;<a href="list">리스트로 돌아가기</a>&gt;</span></div>
 
 </BODY>
 </HTML>

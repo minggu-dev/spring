@@ -9,4 +9,36 @@
 			<if test="_parameter != null">model_num = #{modelNum}</if>
 		</where>
 	</select>
+	
+	<update id="update" parameterType="electronicsDTO">
+		update electronics
+		<set>
+			<if test="modelName != null">model_name=#{modelName}, </if>
+			<if test="price > 0">price=#{price}, </if>
+			<if test="description != null">description=#{description}, </if>
+		</set>
+		<where>
+			model_num=#{modelNum} and password=#{password}
+		</where>
+	</update>
+	
+	<update id="readUpdate" parameterType="string">
+		update electronics
+		<set>
+			<if test="_parameter != null">readnum=readnum+1</if>
+		</set>
+		<where>
+			model_num=#{modelNum}
+		</where>
+	</update>
+	
+	<delete id="delete" parameterType="map">
+		delete electronics
+		where model_num = #{modelNum} and password = #{password}
+	</delete>
+	
+	<insert id="insert" parameterType="electronicsDTO">
+		insert into electronics
+		values(#{modelNum},#{modelName},#{price},#{description},#{password},sysdate,0,#{fname},#{fsize})
+	</insert>
 </mapper>

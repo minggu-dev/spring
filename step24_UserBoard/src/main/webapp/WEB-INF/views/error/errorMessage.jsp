@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isErrorPage="true"%>
+<% response.setStatus(200); %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -10,7 +11,7 @@
 		<div class="logo">
 			<h1>Error !</h1>
 		</div>
-		<p class="lead text-muted">${errorMsg}</p>
+		<p class="lead text-muted">${errorMsg}/${exception.message}</p>
 		<div class="clearfix"></div>
 		<div class="col-lg-6 col-lg-offset-3">
 			<form action="index.html">
@@ -29,9 +30,10 @@
 		<div class="clearfix"></div>
 		<br />
 		<div class="col-lg-6  col-lg-offset-3">
-			<div class="btn-group btn-group-justified">
-				<a href="<c:url value="/user/login"/>" class="btn btn-primary">Login</a>
-				<a href="<c:url value="/index.jsp"/>" class="btn btn-success">Return Website</a>
+			<div class="btn-group btn-group-justified">	
+				<a href="javascript:history.back()" class="btn btn-warning">Back</a>
+				<a href="${pageContext.request.contextPath}/user/login" class="btn btn-primary">Login</a>
+				<a href="${pageContext.request.contextPath}/" class="btn btn-success">Return Website</a>
 			</div>
 
 		</div>

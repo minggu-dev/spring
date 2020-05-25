@@ -13,6 +13,7 @@ public class UserDAOImpl implements UserDAO{
 	
 	@Override
 	public UserDTO loginCheck(UserDTO userDTO) {
-		return session.selectOne("userMapper.userLogin", userDTO);
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		return mapper.loginCheck(userDTO);
 	}
 }
