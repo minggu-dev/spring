@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+	<!-- url 어떤 요청이 되었을 때 ROLE 체크 할것인지?? -->
+	<sec:http auto-config="true" use-expressions="true">
+		<sec:intercept-url pattern="/user/login" access="hasRole('ROLE_USER')"/>
+		<sec:intercept-url pattern="/member/**" access="isAuthenticated()"/>
+		<sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		
+		<sec:form-login
+			login-page="/user/loginForm"
+			login-processing-url="/user/loginCheck"
+			username-parameter="id"
+			password-parameter="pwd"
+			default-target-url="/"
+			authentication-failure-forward-url="/user/loginForm?ng"/>
+			
+		<sec:logout
+			logout-url="/logout"
+			delete-cookies="JSESSIONID"
+			invalidate-session="true"
+			logout-success-url="/"
+		/>
+	</sec:http>
+	
+	<!-- 계정에 따른 권한 설정이 필요하다.(DB를 이용 or in Memory) -->
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="mino" password="1234" authorities="ROLE_USER"/>
+				<sec:user name="eungbi" password="1234" authorities="ROLE_ADMIN, ROLE_USER"/>
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+</beans>
