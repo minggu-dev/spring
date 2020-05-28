@@ -6,4 +6,24 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
 	<!-- url 어떤 요청이 되었을 때 ROLE 체크 할것인지?? -->
+	<sec:http use-expressions="true" auto-config="true">
+		<sec:intercept-url pattern="/admin/main" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/member/main" access="isAuthenticated()"/>
+		
+		<sec:form-login login-page="/member/loginForm"
+			login-processing-url="/login"
+			username-parameter="id"
+			password-parameter="password"
+			default-target-url="/"
+			authentication-failure-handler-ref="memberAuthenticationFailureHandler"/>
+		<sec:logout
+			invalidate-session="true"
+			logout-url="/member/logout"
+			delete-cookies="JSESSIONID"
+			logout-success-url="/"/>
+	</sec:http>
+	
+	<sec:authentication-manager>
+		<sec:authentication-provider ref="memberAuthenticationProvider"/>
+	</sec:authentication-manager>
 </beans>

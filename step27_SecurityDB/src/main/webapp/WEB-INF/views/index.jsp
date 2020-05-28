@@ -4,6 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -42,7 +43,7 @@
 		<!-- 인증 안됐으면 -->
 		<sec:authorize access="isAnonymous()">
 			<!-- 또는 !isAuthenticated() 로 비교해도 된다.  로그인을 하지 않은 사용자-->
-			<li><a href="${pageContext.request.contextPath}/loginForm">로그인 폼</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/loginForm">로그인 폼</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/joinForm">가입</a></li>
 		</sec:authorize>
 		
@@ -65,9 +66,9 @@
 
 		
 		<!-- 
-로그아웃은 스프링시큐리티 4 부터는 로그아웃시 POST 방식으로 이동하며 /logout url로 요청한다. (따로 정의하지 않으면)
-그리고 _csrf 를 요청파라미터로 보내야 한다.
- -->
+		로그아웃은 스프링시큐리티 4 부터는 로그아웃시 POST 방식으로 이동하며 /logout url로 요청한다. (따로 정의하지 않으면)
+		그리고 _csrf 를 요청파라미터로 보내야 한다.
+		 -->
 	<form id="logoutForm" action="${pageContext.request.contextPath}/member/logout"
 		method="post" style="display: none">
 		<input type="hidden" name="${_csrf.parameterName}"

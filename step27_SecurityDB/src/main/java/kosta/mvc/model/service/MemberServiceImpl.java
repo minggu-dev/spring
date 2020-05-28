@@ -5,9 +5,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kosta.mvc.model.domain.Authority;
 import kosta.mvc.model.domain.Member;
 import kosta.mvc.model.repository.AuthoritiesDAO;
 import kosta.mvc.model.repository.MemberDAO;
+import kosta.mvc.util.Constants;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -30,10 +32,21 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		//가입이 성공하면 권한 부여...
-		if(member.getUserType() == 1) {
-			
+		if(member.getUserType() == null) {
+			throw new RuntimeException("userType오류");
 		}
-		return 0;
+		
+		if(Constants.ROLE_ADMIN.equals(member.getUserType())) {
+			result = authoritiesDao.insertAuthority(new Authority(member.getId(), member.getUserType()));
+			if(result == 0) {
+				throw new RuntimeException("권한부여 실패(admin)");
+			}
+		}
+		result = authoritiesDao.insertAuthority(new Authority(member.getId(), Constants.ROLE_USER));
+		if(result == 0) {
+			throw new RuntimeException("권한부여 실패(user)");
+		}
+		return result;
 	}
 
 }

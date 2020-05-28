@@ -42,7 +42,7 @@
 			<tr>
 				<td>User Type</td>
 				<td>
-					<input type=radio value="ROLE_USER" name="userType">ROLE_USER  
+					<input type=radio value="ROLE_MEMBER" name="userType">ROLE_USER  
 					<input type=radio value="ROLE_ADMIN" name="userType">ROLE_ADMIN
 				</td>
 			</tr>

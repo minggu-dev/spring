@@ -5,7 +5,7 @@
 
 
 
-<h4>${exception.message}</h4>
+<h4>${errMsg}</h4>
 
 <a href="${pageContext.request.contextPath}/">메인</a>
 
