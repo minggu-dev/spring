@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: goods
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: kosta
+Implementation-Vendor-Id: com.study
+Build-Jdk: 1.8.0_241
+Implementation-URL: http://maven.apache.org
+Created-By: Maven Integration for Eclipse
+
